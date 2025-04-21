@@ -2,7 +2,6 @@ class User {
     readonly id: String | undefined
     readonly email: String
     readonly name: String
-    readonly password: String
     isActive: boolean
     failedLoginAttempts: number
     account_locked_until: Date | null
@@ -14,7 +13,6 @@ class User {
     constructor(
         email: String,
         name: String,
-        password: String,
         isActive: boolean = true,
         id: String | undefined = undefined,
         failedLoginAttempts: number = 0,
@@ -27,7 +25,6 @@ class User {
         this.id = id;
         this.email = email;
         this.name = name;
-        this.password = password;
         this.isActive = isActive;
         this.failedLoginAttempts = failedLoginAttempts;
         this.account_locked_until = account_locked_until;
