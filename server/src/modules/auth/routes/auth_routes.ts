@@ -4,7 +4,7 @@ import { validationResult } from "express-validator";
 import AuthRepository from "../repositories/auth_repository";
 import AuthService from "../services/auth_service";
 import AuthController from "../controllers/auth_controller";
-import pool from "../../db/database";
+import pool from "../../../db/database";
 
 const router = Router();
 
