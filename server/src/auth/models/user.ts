@@ -1,42 +1,56 @@
 class User {
-    readonly id: String | undefined
-    readonly email: String
-    readonly name: String
+    readonly user_id: string | undefined
+    readonly email: string
+    readonly name: string
+    readonly password_hash: string
     isActive: boolean
     failedLoginAttempts: number
-    account_locked_until: Date | null
-    email_is_verified: boolean
-    readonly created_at: Date
-    last_login: Date | null
-    password_last_changed_at: Date | null
+    accountLockedUntil: Date | null
+    emailIsVerified: boolean
+    readonly createdAt: Date
+    lastLogin: Date | null
+    passwordLastChangedAt: Date | null
 
     constructor(
-        email: String,
-        name: String,
+        user_id: string | undefined = undefined,
+        email: string,
+        name: string,
+        password_hash: string,
         isActive: boolean = true,
-        id: String | undefined = undefined,
         failedLoginAttempts: number = 0,
-        account_locked_until: Date | null = null,
-        email_is_verified: boolean = false,
-        created_at: Date = new Date(),
-        last_login: Date | null = null,
-        password_last_changed_at: Date | null = null,
+        accountLockedUntil: Date | null = null,
+        emailIsVerified: boolean = false,
+        createdAt: Date = new Date(),
+        lastLogin: Date | null = null,
+        passwordLastChangedAt: Date | null = null,
     ) {
-        this.id = id;
+        this.user_id = user_id;
         this.email = email;
         this.name = name;
+        this.password_hash = password_hash;
         this.isActive = isActive;
         this.failedLoginAttempts = failedLoginAttempts;
-        this.account_locked_until = account_locked_until;
-        this.email_is_verified = email_is_verified;
-        this.created_at = created_at;
-        this.last_login = last_login;
-        this.password_last_changed_at = password_last_changed_at;
+        this.accountLockedUntil = accountLockedUntil;
+        this.emailIsVerified = emailIsVerified;
+        this.createdAt = createdAt;
+        this.lastLogin = lastLogin;
+        this.passwordLastChangedAt = passwordLastChangedAt;
     }
 
-    isAccountLocked(): boolean {
-        if (this.account_locked_until == null) return false;
-        return this.account_locked_until > new Date();
+    static fromRow(row: any): User {
+        return new User(
+            row.user_id,
+            row.email,
+            row.name,
+            row.password_hash,
+            row.is_active,
+            row.failed_login_attempts,
+            row.account_locked_until,
+            row.email_is_verified,
+            row.created_at,
+            row.last_login,
+            row.password_last_changed_at
+        );
     }
 }
 
