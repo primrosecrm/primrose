@@ -1,0 +1,12 @@
+import { body } from 'express-validator'
+
+export const registerUserValidation = [
+    body('email').isEmail(),
+    body('name').notEmpty(),
+    body('password').isLength({ min: 8 })
+];
+
+export const loginUserValidation = [
+    body('email').isEmail(),
+    body('password').isLength({ min: 8 })
+];
