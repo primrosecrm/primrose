@@ -1,14 +1,16 @@
 import { bad, ok } from "../../helpers/responseHelper";
 import { Request, Response } from 'express';
-import bcrypt from 'bcrypt';
 import User from "../models/user";
 import AuthRepository from "../repositories/auth_repository";
+import PasswordService from "./password_service";
 
 export default class AuthService {
     private db: AuthRepository;
+    private passwordService: PasswordService;
 
-    constructor(db: AuthRepository) {
+    constructor(db: AuthRepository, passwordService: PasswordService) {
         this.db = db;
+        this.passwordService = passwordService;
     }
 
     registerUser = async (req: Request, res: Response) => {
@@ -19,7 +21,7 @@ export default class AuthService {
             return bad(res, 'An account with that email address has already been registered.');
         }
     
-        let hashedPassword = await bcrypt.hash(password, 10);
+        let hashedPassword = await this.passwordService.hashString(password);
         let createdUser = await this.db.createUser(email, name, hashedPassword);
         if (createdUser === null) {
             return bad(res, 'Registration failed');
@@ -36,7 +38,7 @@ export default class AuthService {
             return bad(res, 'Invalid or expired login credentials.');
         }
     
-        let isPasswordValid = await bcrypt.compare(password, userRow.password_hash);
+        let isPasswordValid = await this.passwordService.checkString(password, userRow.password_hash);
         if (!isPasswordValid) {
             return bad(res, 'Invalid or expired login credentials.');
         }

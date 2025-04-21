@@ -5,11 +5,14 @@ import AuthRepository from "../repositories/auth_repository";
 import AuthService from "../services/auth_service";
 import AuthController from "../controllers/auth_controller";
 import pool from "../../../db/database";
+import { err } from "../../helpers/responseHelper";
+import PasswordService from "../services/password_service";
 
 const router = Router();
 
 const authRepository = new AuthRepository(pool);
-const authService = new AuthService(authRepository);
+const passwordService = new PasswordService();
+const authService = new AuthService(authRepository, passwordService);
 const authController = new AuthController(authService);
 
 router.post(
@@ -17,10 +20,7 @@ router.post(
     registerUserValidation, 
     (req: Request, res: Response, next: NextFunction): void => {
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.status(500).json({ errors: errors.array() });
-            return;
-        }
+        if (!errors.isEmpty()) return err(res, '', errors.array());
 
         next();
     }, 
@@ -32,10 +32,7 @@ router.post(
     loginUserValidation,
     (req: Request, res: Response, next: NextFunction): void => {
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            res.status(500).json({ errors: errors.array() });
-            return;
-        }
+        if (!errors.isEmpty()) return err(res, '', errors.array());
 
         next();
     },

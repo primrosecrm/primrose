@@ -1,4 +1,4 @@
-class User {
+export default class User {
     readonly user_id: string | undefined
     readonly email: string
     readonly name: string
@@ -53,5 +53,3 @@ class User {
         );
     }
 }
-
-export default User;

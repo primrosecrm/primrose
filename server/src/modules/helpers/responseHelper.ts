@@ -14,6 +14,13 @@ export const bad = (res: Response, message = 'Bad request', data: any = {}): voi
     });
 };
 
+export const lost = (res: Response, message = 'Ur lost dude', data: any = {}): void => {
+    res.status(404).json({
+        message,
+        data
+    });
+};
+
 export const err = (res: Response, message = 'Internal server error', data: any = {}): void => {
     res.status(500).json({
         message,
