@@ -13,7 +13,7 @@ export default class AuthController {
         try {
             return this.authService.registerUser(req, res);
         } catch (error) {
-            return err(res, '', error);
+            return err(res, undefined, error);
         }
     }
 
@@ -21,7 +21,7 @@ export default class AuthController {
         try {
             return this.authService.loginUser(req, res);
         } catch (error) {
-            return err(res, '', error);
+            return err(res, undefined, error);
         }
     }
 }

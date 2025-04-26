@@ -18,10 +18,6 @@ export default class PasswordService {
         }
 
         return false;
-
-        // Alternative regex implementation for password validation (Callum Poskitt)
-        // const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-        // return regex.test(password);
     }
 
     hashString = async (str: string): Promise<string> => {

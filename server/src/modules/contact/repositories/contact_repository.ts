@@ -6,4 +6,8 @@ export default class ContactRepository {
     constructor(db: Pool) {
         this.db = db;
     }
+
+    createContact = async () => {
+        
+    }
 }
