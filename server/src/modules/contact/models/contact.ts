@@ -1,33 +1,47 @@
 export default class Contact {
+    userId: string;
     firstName: string;
     lastName: string;
     email: string;
-    phoneNumber: string;
-    status: boolean;
+    phone: string;
     createdAt: Date;
     preferredContactMethod: string;
-    notes?: string;
-    industry?: string;
+    notes: string;
+    isArchived: boolean;
 
     constructor(
+        userId: string,
         firstName: string,
         lastName: string,
         email: string,
-        phoneNumber: string,
-        status: boolean,
-        dateAdded: Date,
+        phone: string,
         preferredContactMethod: string,
-        notes?: string,
-        industry?: string,
+        notes: string,
+        isArchived: boolean,
+        createdAt: Date,
     ) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.status = status;
-        this.createdAt = dateAdded;
         this.preferredContactMethod = preferredContactMethod;
+        this.email = email;
+        this.phone = phone;
         this.notes = notes;
-        this.industry = industry;
+        this.isArchived = isArchived;
+        this.createdAt = createdAt;
+    }
+
+    static fromRow(row: any): Contact {
+        return new Contact(
+            row.user_id,
+            row.first_name,
+            row.last_name,
+            row.preferred_contact_method,
+            row.email,
+            row.phone,
+            row.notes,
+            row.is_archived,
+            row.created_at
+        );
     }
 }

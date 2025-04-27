@@ -18,10 +18,9 @@ export default class AuthRepository {
     }
 
     createUser = async (email: String, name: String, password_hash: String): Promise<User | null> => {    
-        await this.db.query(`
-            insert into users (email, name, password_hash)
-            values ($1, $2, $3)
-            `, 
+        await this.db.query(
+            `insert into users (email, name, password_hash)
+            values ($1, $2, $3)`, 
             [email, name, password_hash]
         );
 

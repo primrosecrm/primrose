@@ -17,15 +17,6 @@ export default class ContactController {
         }
     }
 
-    
-    getContact = async (req: Request, res: Response) => {
-        try {
-            return await this.contactService.getContact(req, res);
-        } catch (error) {
-            return bad(res, undefined, error);
-        }
-    }
-
     getContacts = async (req: Request, res: Response) => {
         try {
             return await this.contactService.getContacts(req, res);
@@ -33,7 +24,6 @@ export default class ContactController {
             return bad(res, undefined, error);
         }
     }
-
     
     updateContact = async (req: Request, res: Response) => {
         try {

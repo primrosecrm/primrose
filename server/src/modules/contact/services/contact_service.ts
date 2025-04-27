@@ -10,10 +10,8 @@ export default class ContactService {
     }
 
     createContact = async (req: Request, res: Response): Promise<void> => {
-        ok(res);
-    }
+        let { firstName, lastName, preferredContactMethod, email, phone, notes, isArchived, createdAt } = req.body;
 
-    getContact = async (req: Request, res: Response): Promise<void> => {
         ok(res);
     }
 

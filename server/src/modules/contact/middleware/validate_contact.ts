@@ -2,10 +2,6 @@ export const createContactValidation = [
 
 ];
 
-export const getContactValidation = [
-
-];
-
 export const getContactsValidation = [
 
 ];
