@@ -1,28 +1,33 @@
-import { Pool } from "pg";
-import User from "../models/user";
+import { users } from "../../../db/schema";
+import { eq, InferSelectModel } from "drizzle-orm";
+import { NodePgDatabase } from "drizzle-orm/node-postgres";
+import * as schema from "../../../db/schema";
+
+type User = InferSelectModel<typeof users>;
 
 export default class AuthRepository {
-    private db: Pool;
+    private db: NodePgDatabase<typeof schema>;
 
-    constructor(db: Pool) {
+    constructor(db: NodePgDatabase<typeof schema>) {
         this.db = db;
     }
     
-    getUser = async (email: String): Promise<User | null> => {
-        let result = await this.db.query(
-            `select * from users where email = $1`, [email]
-        );
+    getUser = async (email: string): Promise<User | null> => {
+        const user = await this.db
+            .select()
+            .from(users)
+            .where(eq(users.email, email))
+            .limit(1);
 
-        if (result.rowCount === 0) return null;
-        return result.rows.map(User.fromRow)[0];
+        return user[0] ?? null;
     }
 
-    createUser = async (email: String, name: String, password_hash: String): Promise<User | null> => {    
-        await this.db.query(
-            `insert into users (email, name, password_hash)
-            values ($1, $2, $3)`, 
-            [email, name, password_hash]
-        );
+    createUser = async (email: string, name: string, passwordHash: string): Promise<User | null> => {    
+        await this.db.insert(users).values({
+            email: email,
+            name: name,
+            passwordHash: passwordHash
+        });
 
         return this.getUser(email);
     }

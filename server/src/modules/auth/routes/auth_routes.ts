@@ -4,13 +4,13 @@ import { validationResult } from "express-validator";
 import AuthRepository from "../repositories/auth_repository";
 import AuthService from "../services/auth_service";
 import AuthController from "../controllers/auth_controller";
-import pool from "../../../db/database";
 import { err } from "../../helpers/responseHelper";
 import PasswordService from "../services/password_service";
+import db from "../../../db";
 
 const router = Router();
 
-const authRepository = new AuthRepository(pool);
+const authRepository = new AuthRepository(db);
 const passwordService = new PasswordService();
 const authService = new AuthService(authRepository, passwordService);
 const authController = new AuthController(authService);

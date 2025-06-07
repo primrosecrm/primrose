@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
     "start": "node dist/server.js",
-    "dev": "npx tsc && node dist/server.js"
+    "dev": "npx tsc && node dist/server.js",
+    "db:generate": "drizzle-kit generate --dialect=postgresql --schema ./src/db/schema.ts --out=./src/db/migrations",
+    "db:migrate": "drizzle-kit push --config=drizzle.config.ts"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +19,9 @@
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
+    "@types/pg": "^8.15.4",
     "dotenv": "^16.5.0",
+    "drizzle-kit": "^0.31.1",
     "eslint": "^9.25.0",
     "express": "^5.1.0",
     "install": "^0.13.0",
@@ -25,13 +29,14 @@
     "npm": "^11.3.0",
     "prettier": "^3.5.3",
     "ts-node": "^10.9.2",
+    "tsx": "^4.19.4",
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@types/pg": "^8.11.13",
     "bcrypt": "^5.1.1",
+    "drizzle-orm": "^0.44.2",
     "express-validator": "^7.2.1",
-    "pg": "^8.14.1",
+    "pg": "^8.16.0",
     "pg-pool": "^3.8.0"
   }
 }

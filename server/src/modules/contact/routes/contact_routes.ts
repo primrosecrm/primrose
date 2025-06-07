@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { validationResult } from "express-validator";
 import { err } from "../../helpers/responseHelper";
-import pool from "../../../db/database";
+import pool from "../../../db/db";
 import ContactController from "../controllers/contact_controller";
 import { createContactValidation, deleteContactValidation, getContactsValidation, updateContactValidation } from "../middleware/validate_contact";
 import ContactRepository from "../repositories/contact_repository";
