@@ -1,6 +1,13 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
-import pool from './db';
 import * as schema from "arnica-common"
+import { Pool } from 'pg';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
 const db = drizzle(pool, { schema });
 
