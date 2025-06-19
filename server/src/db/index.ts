@@ -1,5 +1,5 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
-import * as schema from "arnica-common"
+import * as schema from "primose-lib"
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 

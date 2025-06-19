@@ -1,7 +1,7 @@
 // import { users } from "../../../db/schema";
 import { eq, InferSelectModel } from "drizzle-orm";
 import { NodePgDatabase } from "drizzle-orm/node-postgres";
-import * as schema from "arnica-common";
+import * as schema from "primose-lib";
 
 type User = InferSelectModel<typeof schema.users>;
 
