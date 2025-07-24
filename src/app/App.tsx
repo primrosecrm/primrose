@@ -2,7 +2,6 @@ import { Route, Routes } from 'react-router-dom'
 import LoginPage from '../features/auth/components/LoginPage'
 import HomePage from '../features/home/HomePage'
 import NotFoundPage from '../features/misc/NotFoundPage'
-import '../App.css'
 
 const App = () => {
   return (
